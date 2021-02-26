@@ -1,0 +1,143 @@
+---
+layout: compress
+---
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <meta name="theme-color" content="{{ site.theme-color }}">
+
+  <!-- title and SEO stuffs -->
+  {% seo %}
+
+  <!-- load calcite -->
+  {% if page.calcite %}
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@esri/calcite-components@1.0.0-beta.50/dist/calcite/calcite.esm.js"
+    integrity="sha256-slOtQ+Gpop1va2FNsjdld+5s55HypBSHKQAcP2gvZRY=" crossorigin="anonymous"></script>
+  <script nomodule="" src="https://cdn.jsdelivr.net/npm/@esri/calcite-components@1.0.0-beta.50/dist/calcite/calcite.js"
+    integrity="sha256-3kU9254wfwHefHboHpAUCM62wyNmFAdudo7dXKY69Fw=" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@esri/calcite-components@1.0.0-beta.50/dist/calcite/calcite.css"
+    integrity="sha256-/fMWnEoVGCkJ0duckHZNUA7VmOfHa3U8p0iOnJuXDzs=" crossorigin="anonymous">
+  {% endif %}
+
+  <!-- load arcgis rest -->
+  {% if page.rest %}
+  <script src="https://cdn.jsdelivr.net/npm/@esri/arcgis-rest-request@3.0.1/dist/umd/request.umd.min.js"
+    integrity="sha256-P8LkYvEIOwqyuA1L0XXgZ5LSwaeEKHTjfQgIWeUvkH4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@esri/arcgis-rest-feature-layer@3.0.1/dist/umd/feature-layer.umd.min.js"
+    integrity="sha256-B8TWoosQ4ZGnSHlTSdGj4Vign7k3nZmU7Ky3LIq7HTA=" crossorigin="anonymous"></script>
+  {% endif %}
+
+  <!-- chart.js -->
+  {% if page.chart %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+    integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.min.js"
+    integrity="sha256-3kSXcicezu2sKkkqQae/hgspQC+t6zkOA0rS7QtlSyE=" crossorigin="anonymous"></script>
+  {% endif %}
+
+  <!-- site css -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+  <!-- header nav -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/" title="Home">
+          <img src="/images/vernonia_streets.svg" style="height:38px;" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
+          aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav mr-auto">
+            {%- for item in site.data.nav.items -%}
+            {%- if item.title -%}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="{{ item.id }}Dropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ item.title }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="{{ item.id }}Dropdown">
+                {% for subitem in item.subitems %}
+                <a class="dropdown-item{% if page.permalink == subitem.url %} active{% endif %}"
+                  href="{{ subitem.url }}">{{ subitem.page }}</a>
+                {% endfor %}
+              </div>
+            </li>
+            {%- else -%}
+            <li class="nav-item{% if page.permalink == item.url %} active{% endif %}">
+              <a class="nav-link" href="{{ item.url }}">{{ item.page }}</a>
+            </li>
+            {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- /header nav -->
+
+  <!-- content -->
+  <main class="container">
+    <!-- statistics pages -->
+    {% if page.type == "statistics" %}
+    <div class="row">
+      <div class="col-sm-12 col-md-9">
+        {{ content }}
+      </div>
+      <div class="col-md-3 d-none d-md-block">
+        <div class="sticky">
+          <h4>Street Statistics</h4>
+          <div class="list-group list-group-flush">
+            {%- for subitem in site.data.nav.items[1].subitems -%}
+            <a class="list-group-item list-group-item-action{% if page.permalink == subitem.url %} active{% endif %}"
+              href="{{ subitem.url }}">{{ subitem.page }}</a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    {{ content }}
+    {% endif %}
+  </main>
+  <!-- /content -->
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="copyright text-muted">
+        The City of Vernonia is an Equal Opportunity Employer and Provider
+        <br>
+        Copyright &copy; {{ "now" | date: "%Y" }} City of Vernonia
+        <br>
+        Made with <i class="fas fa-heart text-danger"></i> and <i class="fas fa-coffee"></i> in Vernonia, Oregon
+        <br>
+        build: <a href="{{ site.github.repository_url }}/commit/{{ site.github.build_revision }}" target="_blank"
+          rel="noopener">{{ site.github.build_revision | slice: 0, 7 }}</a>
+      </p>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+
+<!-- jquery and bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.8.3/dist/umd/popper.min.js"
+  integrity="sha256-kavdsw93MSM74fXiHMqn1WIhfT2AZoB9NObVgP3whLs=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+  integrity="sha256-7dA7lq5P94hkBsWdff7qobYkp9ope/L5LQy2t/ljPLo=" crossorigin="anonymous"></script>
+
+</html>

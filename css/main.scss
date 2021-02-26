@@ -1,0 +1,85 @@
+---
+#
+---
+////////////////////////////////////////////////////////
+// font awesome icon font https://fontawesome.com/
+////////////////////////////////////////////////////////
+@import url("https://use.fontawesome.com/releases/v5.15.1/css/all.css");
+
+////////////////////////////////////////////////////////
+// sandstone vars and css https://bootswatch.com/sandstone/
+////////////////////////////////////////////////////////
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #f8f5f0 !default;
+$gray-300: #dfd7ca !default;
+$gray-400: #ced4da !default;
+$gray-500: #98978b !default;
+$gray-600: #8e8c84 !default;
+$gray-700: #495057 !default;
+$gray-800: #3e3f3a !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$blue:    #325d88 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #d9534f !default;
+$orange:  #f47c3c !default;
+$yellow:  #ffc107 !default;
+$green:   #93c54b !default;
+$teal:    #20c997 !default;
+$cyan:    #29abe0 !default;
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-200 !default;
+$dark:          $gray-800 !default;
+
+@import "/css/bootstrap.min.css";
+
+/////////////
+// content //
+/////////////
+main.container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+////////////
+// footer //
+////////////
+footer.footer {
+  margin-top: 4em;
+	margin-bottom: 2em;
+	
+  .copyright {
+    text-align: center;
+		margin-bottom: 1rem;
+		font-size: 0.9rem;
+	}
+	.fa-coffee {
+		color: #be9969;
+	}
+}
+
+////////////////////////////////////////////////////////
+// 404
+////////////////////////////////////////////////////////
+.not-found {
+  margin: 3rem 0;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .btn {
+    margin: 0 0.5rem;
+  }
+}

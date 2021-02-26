@@ -1,0 +1,64 @@
+title: Vernonia Streets
+
+email: cityhall@vernonia-or.gov
+
+description: City of Vernonia streets and transportation.
+
+theme-color: "#3E3F3A"
+
+baseurl: ""
+
+url: "https://streets.vernonia-or.gov"
+
+permalink: pretty
+
+highlighter: rouge
+
+markdown: kramdown
+
+github:
+  repository_url: https://github.com/CityOfVernonia/streets.vernonia-or.gov
+  repository_name: streets.vernonia-or.gov
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# http://jch.penibelst.de/
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  ignore:
+    envs: []
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/social-card.png
+
+include:
+  - _headers
+  - _redirects
+
+exclude:
+  - README.md
+  - package.json
+  - package-lock.json
+  - node_modules
+  - .eslintrc
+  - .gitignore
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
